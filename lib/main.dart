@@ -1,40 +1,63 @@
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(MyApp());
-}
+void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        home: Scaffold(
-          appBar: AppBar(
-            title: Text('listview separated'),
-          ),
-          body: HomePage(),
-        ));
+      debugShowCheckedModeBanner: false,
+      title: 'My App',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: Scaffold(
+        appBar: AppBar(title: Text('Listview 範例')),
+        body: BodyWidget(),
+      ),
+    );
   }
 }
+String oneUrl = 'https://i.stack.imgur.com/YN0m7.png';
+String twoUrl = 'https://i.stack.imgur.com/wKzo8.png';
+String threeUrl = 'https://i.stack.imgur.com/Qt4JP.png';
 
-class HomePage extends StatelessWidget {
-  final List<String> entries = <String>['A', 'B', 'C'];
-  final List<int> colorCodes = <int>[600, 500, 100];
+class BodyWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Center(
-        child: ListView.separated(
-          padding: const EdgeInsets.all(8),
-          itemCount: entries.length,
-          itemBuilder: (BuildContext context, int index) {
-            return Container(
-              height: 50,
-              color: Colors.amber[colorCodes[index]],
-              child: Center(child: Text('Entry ${entries[index]}')),
-            );
+    return ListView(
+      children: <Widget>[
+        ListTile(
+          leading: CircleAvatar(
+            backgroundImage: NetworkImage(oneUrl),
+          ),
+          title: Text('第一項'),
+          subtitle: Text('項目說明'),
+          onTap: () {
+            print('點選第一項');
           },
-          separatorBuilder: (BuildContext context, int index) => const Divider(),
         ),
+        ListTile(
+          leading: CircleAvatar(
+            backgroundImage: NetworkImage(twoUrl),
+          ),
+          title: Text('第二項'),
+          subtitle: Text('項目說明'),
+          onTap: () {
+            print('點選第二項');
+          },
+        ),
+        ListTile(
+          leading: CircleAvatar(
+            backgroundImage: NetworkImage(threeUrl),
+          ),
+          title: Text('第三項'),
+          subtitle: Text('項目說明'),
+          onTap: () {
+            print('點選第三項');
+          },
+        ),
+      ],
     );
   }
 }
